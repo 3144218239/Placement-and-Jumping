@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qrcode二维码</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <p>点击二维码进行刷新</p>
+    <!-- 使用CDN加载QRCode库 -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+      const canvas = document.getElementById("canvas");
+
+      function generateQRCode() {
+        const linkTo =
+          "https://www.baidu.com?timestamp=" + new Date().getTime();
+        QRCode.toCanvas(canvas, linkTo, function (error) {
+          if (error) {
+            console.error(error);
+          } else {
+            console.log("QR Code generated successfully with link: " + linkTo);
+          }
+        });
+      }
+
+      // 初次生成二维码
+      generateQRCode();
+
+      // 点击canvas时刷新二维码
+      canvas.addEventListener("click", generateQRCode);
+    </script>
+  </body>
+</html>
